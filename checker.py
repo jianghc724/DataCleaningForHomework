@@ -1,32 +1,31 @@
 class Checker():
-    def intChecker(self, s):
+    def intChecker(self, s, idx):
         if s.isdigit():
             return int(s)
         else:
             res = ""
-            print(s)
             for c in s:
                 if c.isdigit():
                     res = res + c
                 else:
                     break
-            print (res)
+            print ("Int revision from", s, "to", res, "Row", idx)
             return int(res)
 
-    def dateChecker(self, s):
+    def dateChecker(self, s, idx):
         l = s.split('/', 2)
         flag = True
-        year = str(Checker.intChecker(self, l[0]))
+        year = str(Checker.intChecker(self, l[0], idx))
         if len(year) != 4:
             if len(year) == 2:
                 year = '19' + year
             else:
                 return "-1", "-1"
-        month = Checker.intChecker(self, l[1])
+        month = Checker.intChecker(self, l[1], idx)
         if (month >= 13) or (month == 0):
             return "-1", "-1"
         l = l[2].split(' ', 1)
-        day = Checker.intChecker(self, l[0])
+        day = Checker.intChecker(self, l[0], idx)
         if (day > 31) or (day == 0):
             return "-1", "-1"
         if month == 2:
@@ -48,8 +47,8 @@ class Checker():
             time_res = "0:00"
         else:
             time = l[1].split(':', 1)
-            hour = Checker.intChecker(self, time[0])
-            minute = Checker.intChecker(self, time[1])
+            hour = Checker.intChecker(self, time[0], idx)
+            minute = Checker.intChecker(self, time[1], idx)
             if hour > 23:
                 return "-1", "-1"
             if minute > 59:

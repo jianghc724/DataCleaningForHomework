@@ -6,26 +6,28 @@ class Account():
 
     data = []
     cleaned_data = []
+    cur = set()
 
     def __init__(self):
         self.data = FileReader().readFile("card.csv")
 
     def clean(self):
         c = Checker()
-        cur = set()
+        i = 0
         for item in self.data:
-            card_id = c.intChecker(item[0])
-            disp_id = c.intChecker(item[1])
+            i = i + 1
+            card_id = c.intChecker(item[0], i)
+            disp_id = c.intChecker(item[1], i)
             type = item[2]
-            date, time = c.dateChecker(item[3])
+            date, time = c.dateChecker(item[3], i)
             if date == '-1' and time == '-1':
-                print('date error', card_id)
+                print('date error Row', i)
                 continue
-            if not c.sameChecker(cur, card_id):
+            if not c.sameChecker(self.cur, card_id):
                 self.cleaned_data.append([card_id, disp_id, type, date, time])
-                cur.add(card_id)
+                self.cur.add(card_id)
             else:
-                print('primary key error', card_id)
+                print('primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')

@@ -6,20 +6,22 @@ class Account():
 
     data = []
     cleaned_data = []
+    cur = set()
 
     def __init__(self):
         self.data = FileReader().readFile("client.csv")
 
     def clean(self):
         c = Checker()
-        cur = set()
+        i = 0
         for item in self.data:
-            client_id = c.intChecker(item[0])
+            i = i + 1
+            client_id = c.intChecker(item[0], i)
             birth_number = item[1]
             y = birth_number[0:2]
             m = birth_number[2:4]
             d = birth_number[4:6]
-            m = c.intChecker(m)
+            m = c.intChecker(m, i)
             if (m > 50):
                 m = m - 50
                 gender = "female"
@@ -27,16 +29,16 @@ class Account():
                 gender = "male"
             m = str(m)
             birth_str = y + '/' + m + '/' + d
-            birth, time = c.dateChecker(birth_str)
-            district_id = c.intChecker(item[2])
+            birth, time = c.dateChecker(birth_str, i)
+            district_id = c.intChecker(item[2], i)
             if birth == '-1' and time == '-1':
-                print('date error', client_id)
+                print('date error Row', i)
                 continue
-            if not c.sameChecker(cur, client_id):
+            if not c.sameChecker(self.cur, client_id):
                 self.cleaned_data.append([client_id, district_id, gender, birth])
-                cur.add(client_id)
+                self.cur.add(client_id)
             else:
-                print('primary key error', client_id)
+                print('primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')
