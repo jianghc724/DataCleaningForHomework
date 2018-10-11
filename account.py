@@ -19,13 +19,13 @@ class Account():
             frequency = item[2]
             date, time = c.dateChecker(item[3])
             if date == '-1' and time == '-1':
-                print(account_id)
+                print('date error', account_id)
                 continue
             if not c.sameChecker(cur, account_id):
                 self.cleaned_data.append([account_id, district_id, frequency, date, time])
                 cur.add(account_id)
             else:
-                print(account_id)
+                print('primary key error', account_id)
 
     def output(self, fileName):
         f = open(fileName, 'w')

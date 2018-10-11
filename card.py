@@ -19,13 +19,13 @@ class Account():
             type = item[2]
             date, time = c.dateChecker(item[3])
             if date == '-1' and time == '-1':
-                print(card_id)
+                print('date error', card_id)
                 continue
             if not c.sameChecker(cur, card_id):
                 self.cleaned_data.append([card_id, disp_id, type, date, time])
                 cur.add(card_id)
             else:
-                print(card_id)
+                print('primary key error', card_id)
 
     def output(self, fileName):
         f = open(fileName, 'w')

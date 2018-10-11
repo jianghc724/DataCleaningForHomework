@@ -23,10 +23,12 @@ class Checker():
             else:
                 return "-1", "-1"
         month = Checker.intChecker(self, l[1])
-        if month >= 13:
+        if (month >= 13) or (month == 0):
             return "-1", "-1"
         l = l[2].split(' ', 1)
         day = Checker.intChecker(self, l[0])
+        if (day > 31) or (day == 0):
+            return "-1", "-1"
         if month == 2:
             if (day == 30) or (day == 31):
                 return "-1", "-1"
@@ -41,17 +43,20 @@ class Checker():
                 return "-1", "-1"
         month = str(month)
         day = str(day)
-        time = l[1].split(':', 1)
-        hour = Checker.intChecker(self, time[0])
-        minute = Checker.intChecker(self, time[1])
-        if hour > 23:
-            return "-1", "-1"
-        if minute > 59:
-            return "-1", "-1"
-        hour = str(hour)
-        minute = str(minute).zfill(2)
         date_res = year + '-' + month + '-' + day
-        time_res = hour + ':' + minute
+        if len(l) == 1:
+            time_res = "0:00"
+        else:
+            time = l[1].split(':', 1)
+            hour = Checker.intChecker(self, time[0])
+            minute = Checker.intChecker(self, time[1])
+            if hour > 23:
+                return "-1", "-1"
+            if minute > 59:
+                return "-1", "-1"
+            hour = str(hour)
+            minute = str(minute).zfill(2)
+            time_res = hour + ':' + minute
         return date_res, time_res
 
     def sameChecker(self, cur, new):
