@@ -53,3 +53,9 @@ class Checker():
         date_res = year + '-' + month + '-' + day
         time_res = hour + ':' + minute
         return date_res, time_res
+
+    def sameChecker(self, cur, new):
+        if new in cur:
+            return True
+        else:
+            return False
