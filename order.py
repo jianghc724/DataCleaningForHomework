@@ -19,16 +19,18 @@ class Order():
             order_id = c.intChecker(item[0], i)
             account_id = c.intChecker(item[1], i)
             if not c.sameChecker(account_id_set, account_id):
-                print('foreign key error Row', i)
+                print('Foreign key account_id error Row', i)
             bank_to = item[2]
             account_to = c.intChecker(item[3], i)
             amount = c.intChecker(item[4], i)
-            k_symbol = item[5]
+            k_symbol = c.strChecker(item[5], [" ", "POJISTNE", "SIPO", "LEASING", "UVER"], i)
+            if k_symbol == "-1":
+                print('String k_symbol error Row', i)
             if not c.sameChecker(self.cur, order_id):
                 self.cleaned_data.append([order_id, account_id, bank_to, account_to, amount, k_symbol])
                 self.cur.add(order_id)
             else:
-                print('primary key error Row', i)
+                print('Primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')

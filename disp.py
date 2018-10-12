@@ -19,16 +19,18 @@ class Disp():
             disp_id = c.intChecker(item[0], i)
             client_id = c.intChecker(item[1], i)
             if not c.sameChecker(client_id_set, client_id):
-                print('foreign key error Row', i)
+                print('Foreign key client_id error Row', i)
             account_id = c.intChecker(item[2], i)
             if not c.sameChecker(account_id_set, account_id):
-                print('foreign key error Row', i)
-            type = item[3]
+                print('Foreign key account_id error Row', i)
+            type = c.strChecker(item[3], ["OWNER", "DISPONENT"], i)
+            if type == "-1":
+                print('String error type Row', i)
             if not c.sameChecker(self.cur, disp_id):
                 self.cleaned_data.append([disp_id, client_id, account_id, type])
                 self.cur.add(disp_id)
             else:
-                print('primary key error Row', i)
+                print('Primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')

@@ -19,10 +19,10 @@ class Loan():
             loan_id = c.intChecker(item[0], i)
             account_id = c.intChecker(item[1], i)
             if not c.sameChecker(account_id_set, account_id):
-                print('foreign key error Row', i)
+                print('Foreign key account_id error Row', i)
             date, time = c.dateChecker(item[2], i)
             if date == '-1' and time == '-1':
-                print('date error Row', i)
+                print('Date error Row', i)
                 continue
             amount = c.intChecker(item[3], i)
             duration = c.intChecker(item[4], i)
@@ -39,7 +39,9 @@ class Loan():
                 _a = amount
                 amount = payments * duration
                 print("Amount revision from", _a, "to", amount, "Row", i)
-            status = item[6]
+            status = c.strChecker(item[6], ["A", "B", "C", "D"], i)
+            if status == "-1":
+                print('String status error Row', i)
             payduration = c.intChecker(item[7], i)
             if payduration > duration:
                 print ("Payduration error Row", i)
@@ -48,7 +50,7 @@ class Loan():
                 self.cleaned_data.append([loan_id, account_id, date, time, amount, duration, payments, status, payduration])
                 self.cur.add(loan_id)
             else:
-                print('primary key error Row', i)
+                print('Primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')

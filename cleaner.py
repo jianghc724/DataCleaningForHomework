@@ -38,7 +38,7 @@ class Cleaner():
         print("Error in order:")
         order.clean(account.cur)
         order.output("cleaned_order.csv")
-        print("Error in account:")
+        print("Error in trans:")
         trans.clean(account.cur)
         trans.output("cleaned_trans.csv")
 

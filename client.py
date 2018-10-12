@@ -31,16 +31,16 @@ class Client():
             birth_str = y + '/' + m + '/' + d
             birth, time = c.dateChecker(birth_str, i)
             if birth == '-1' and time == '-1':
-                print('date error Row', i)
+                print('Date error Row', i)
                 continue
             district_id = c.intChecker(item[2], i)
             if not c.sameChecker(district_id_set, district_id):
-                print('foreign key error Row', i)
+                print('Foreign key district_id error Row', i)
             if not c.sameChecker(self.cur, client_id):
                 self.cleaned_data.append([client_id, district_id, gender, birth])
                 self.cur.add(client_id)
             else:
-                print('primary key error Row', i)
+                print('Primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')

@@ -1,4 +1,5 @@
 import re
+import numpy as np
 
 class Checker():
     def allintChecker(self, s, idx):
@@ -97,3 +98,35 @@ class Checker():
             return True
         else:
             return False
+
+    def strChecker(self, s, strs, idx):
+        for _s in strs:
+            if s == _s:
+                return s
+        min_s = ""
+        min_d = 100
+        for _s in strs:
+            m = len(s)
+            n = len(_s)
+            dist = np.zeros((m + 1, n + 1))
+            for i in range(0, m + 1):
+                dist[i][0] = i
+            for j in range(0, n + 1):
+                dist[0][j] = j
+            for i in range(1, m + 1):
+                for j in range(1, n + 1):
+                    cost = 0
+                    if s[i - 1] != _s[j - 1]:
+                        cost = 1
+                    deletion = dist[i - 1][j] + 1
+                    insertion = dist[i][j - 1] + 1
+                    substitution = dist[i - 1][j - 1] + cost
+                    dist[i][j] = min(deletion, insertion, substitution)
+            if dist[m][n] < min_d:
+                min_d = dist[m][n]
+                min_s = _s
+        if min_d <= 3:
+            print ("String revision from", s, "to", _s, "Row", idx)
+            return _s
+        else:
+            return "-1"

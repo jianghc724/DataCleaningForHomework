@@ -28,7 +28,7 @@ class District():
                 self.cleaned_data.append([district_id, district_name, region, hab_number, city_number, ave_salary, unemploy_rate, crime_number])
                 self.cur.add(district_id)
             else:
-                print('primary key error Row', i)
+                print('Primary key error Row', i)
 
     def output(self, fileName):
         f = open(fileName, 'w')
