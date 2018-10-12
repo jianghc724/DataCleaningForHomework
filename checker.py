@@ -12,6 +12,13 @@ class Checker():
             print ("Int revision from", s, "to", res, "Row", idx)
             return int(res)
 
+    def floatChecker(self, s, idx):
+        l = s.split('.', 1)
+        l1 = Checker.intChecker(self, l[0], idx)
+        l2 = Checker.intChecker(self, l[1], idx)
+        s = str(l1) + '.' + str(l2)
+        return float(s)
+
     def dateChecker(self, s, idx):
         l = s.split('/', 2)
         flag = True
