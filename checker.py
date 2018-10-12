@@ -8,7 +8,10 @@ class Checker():
                 if c.isdigit():
                     res = res + c
                 else:
-                    break
+                    if c == '-':
+                        continue
+                    else:
+                        break
             print ("Int revision from", s, "to", res, "Row", idx)
             return int(res)
 
