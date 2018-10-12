@@ -34,7 +34,7 @@ class Card():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['card_id', 'disp_id', 'type', 'issue_date', 'issue_time'])
         for item in self.cleaned_data:

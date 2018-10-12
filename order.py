@@ -33,7 +33,7 @@ class Order():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['order_id', 'account_id', 'bank_to', 'account_to', 'amount', 'k_symbol'])
         for item in self.cleaned_data:

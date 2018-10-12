@@ -31,7 +31,7 @@ class District():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['district_id', 'district_name', 'region', 'hab_number', 'city_number', 'ave_salary', 'unemploy_rate', 'crime_number'])
         for item in self.cleaned_data:

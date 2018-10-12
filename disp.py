@@ -33,7 +33,7 @@ class Disp():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['disp_id', 'client_id', 'account_id', 'type'])
         for item in self.cleaned_data:

@@ -53,7 +53,7 @@ class Loan():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['loan_id', 'account_id', 'date', 'time', 'amount', 'duration', 'payments', 'status', 'payduration'])
         for item in self.cleaned_data:

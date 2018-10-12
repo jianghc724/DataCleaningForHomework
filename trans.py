@@ -44,7 +44,7 @@ class Trans():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['trans_id', 'account_id', 'date', 'time', 'type', 'operation', 'amount', 'balance', 'k_symbol', 'bank', 'account'])
         for item in self.cleaned_data:

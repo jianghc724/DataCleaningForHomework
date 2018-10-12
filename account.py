@@ -34,7 +34,7 @@ class Account():
                 print('Primary key error Row', i)
 
     def output(self, fileName):
-        f = open(fileName, 'w')
+        f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
         csvwriter.writerow(['account_id', 'district_id', 'frequency', 'date', 'time'])
         for item in self.cleaned_data:
