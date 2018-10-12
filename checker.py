@@ -126,7 +126,7 @@ class Checker():
                 min_d = dist[m][n]
                 min_s = _s
         if min_d <= 3:
-            print ("String revision from", s, "to", _s, "Row", idx)
+            print ("String revision from", s, "to", min_s, "Row", idx)
             return _s
         else:
             return "-1"
