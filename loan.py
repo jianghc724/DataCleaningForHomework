@@ -11,13 +11,15 @@ class Loan():
     def __init__(self):
         self.data = FileReader().readFile("loan.csv")
 
-    def clean(self):
+    def clean(self, account_id_set):
         c = Checker()
         i = 0
         for item in self.data:
             i = i + 1
             loan_id = c.intChecker(item[0], i)
             account_id = c.intChecker(item[1], i)
+            if not c.sameChecker(account_id_set, account_id):
+                print('foreign key error Row', i)
             date, time = c.dateChecker(item[2], i)
             if date == '-1' and time == '-1':
                 print('date error Row', i)
@@ -58,5 +60,5 @@ class Loan():
 if __name__ == '__main__':
     loan = Loan()
     # print(account.data)
-    loan.clean()
+    loan.clean(set(range(1,10000000)))
     loan.output("cleaned_loan.csv")

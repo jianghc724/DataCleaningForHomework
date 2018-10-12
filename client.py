@@ -11,7 +11,7 @@ class Client():
     def __init__(self):
         self.data = FileReader().readFile("client.csv")
 
-    def clean(self):
+    def clean(self, district_id_set):
         c = Checker()
         i = 0
         for item in self.data:
@@ -30,10 +30,12 @@ class Client():
             m = str(m)
             birth_str = y + '/' + m + '/' + d
             birth, time = c.dateChecker(birth_str, i)
-            district_id = c.intChecker(item[2], i)
             if birth == '-1' and time == '-1':
                 print('date error Row', i)
                 continue
+            district_id = c.intChecker(item[2], i)
+            if not c.sameChecker(district_id_set, district_id):
+                print('foreign key error Row', i)
             if not c.sameChecker(self.cur, client_id):
                 self.cleaned_data.append([client_id, district_id, gender, birth])
                 self.cur.add(client_id)
@@ -50,5 +52,5 @@ class Client():
 if __name__ == '__main__':
     client = Client()
     # print(account.data)
-    client.clean()
+    client.clean(set(range(1,10000000)))
     client.output("cleaned_client.csv")

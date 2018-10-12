@@ -11,13 +11,15 @@ class Card():
     def __init__(self):
         self.data = FileReader().readFile("card.csv")
 
-    def clean(self):
+    def clean(self, disp_id_set):
         c = Checker()
         i = 0
         for item in self.data:
             i = i + 1
             card_id = c.intChecker(item[0], i)
             disp_id = c.intChecker(item[1], i)
+            if not c.sameChecker(disp_id_set, disp_id):
+                print('foreign key error Row', i)
             type = item[2]
             date, time = c.dateChecker(item[3], i)
             if date == '-1' and time == '-1':
@@ -39,5 +41,5 @@ class Card():
 if __name__ == '__main__':
     card = Card()
     # print(account.data)
-    card.clean()
+    card.clean(set(range(1,10000000)))
     card.output("cleaned_card.csv")

@@ -11,13 +11,15 @@ class Order():
     def __init__(self):
         self.data = FileReader().readFile("order.csv")
 
-    def clean(self):
+    def clean(self, account_id_set):
         c = Checker()
         i = 0
         for item in self.data:
             i = i + 1
             order_id = c.intChecker(item[0], i)
             account_id = c.intChecker(item[1], i)
+            if not c.sameChecker(account_id_set, account_id):
+                print('foreign key error Row', i)
             bank_to = item[2]
             account_to = c.intChecker(item[3], i)
             amount = c.intChecker(item[4], i)
@@ -38,5 +40,5 @@ class Order():
 if __name__ == '__main__':
     order = Order()
     # print(account.data)
-    order.clean()
+    order.clean(set(range(1,10000000)))
     order.output("cleaned_order.csv")

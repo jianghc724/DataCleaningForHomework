@@ -11,14 +11,18 @@ class Disp():
     def __init__(self):
         self.data = FileReader().readFile("disp.csv")
 
-    def clean(self):
+    def clean(self, client_id_set, account_id_set):
         c = Checker()
         i = 0
         for item in self.data:
             i = i + 1
             disp_id = c.intChecker(item[0], i)
             client_id = c.intChecker(item[1], i)
+            if not c.sameChecker(client_id_set, client_id):
+                print('foreign key error Row', i)
             account_id = c.intChecker(item[2], i)
+            if not c.sameChecker(account_id_set, account_id):
+                print('foreign key error Row', i)
             type = item[3]
             if not c.sameChecker(self.cur, disp_id):
                 self.cleaned_data.append([disp_id, client_id, account_id, type])
@@ -36,5 +40,5 @@ class Disp():
 if __name__ == '__main__':
     disp = Disp()
     # print(account.data)
-    disp.clean()
+    disp.clean(set(range(1,10000000)), set(range(1,10000000)))
     disp.output("cleaned_disp.csv")
