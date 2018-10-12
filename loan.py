@@ -2,7 +2,7 @@ from reader import FileReader
 from checker import Checker
 import csv
 
-class Card():
+class Loan():
 
     data = []
     cleaned_data = []
@@ -56,7 +56,7 @@ class Card():
             csvwriter.writerow(item)
 
 if __name__ == '__main__':
-    card = Card()
+    loan = Loan()
     # print(account.data)
-    card.clean()
-    card.output("cleaned_loan.csv")
+    loan.clean()
+    loan.output("cleaned_loan.csv")
