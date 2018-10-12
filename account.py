@@ -11,7 +11,7 @@ class Account():
     def __init__(self):
         self.data = FileReader().readFile("account.csv")
 
-    def clean(self, district_set):
+    def clean(self, district_id_set):
         c = Checker()
         i = 0
         for item in self.data:
