@@ -33,11 +33,14 @@ class Client():
             if birth == '-1' and time == '-1':
                 print('Date error Row', i)
                 continue
+            birth_year = int(birth[0:4])
+            age = 2000 - birth_year
+            age_type = min(8, int(age / 10))
             district_id = c.intChecker(item[2], i)
             if not c.sameChecker(district_id_set, district_id):
                 print('Foreign key district_id error Row', i)
             if not c.sameChecker(self.cur, client_id):
-                self.cleaned_data.append([client_id, district_id, gender, birth])
+                self.cleaned_data.append([client_id, district_id, gender, birth, age, age_type])
                 self.cur.add(client_id)
             else:
                 print('Primary key error Row', i)
@@ -45,7 +48,7 @@ class Client():
     def output(self, fileName):
         f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
-        csvwriter.writerow(['card_id', 'disp_id', 'type', 'issue_date', 'issue_time'])
+        csvwriter.writerow(['client_id', 'district_id', 'gender', 'birth', 'age', 'age_type'])
         for item in self.cleaned_data:
             csvwriter.writerow(item)
 

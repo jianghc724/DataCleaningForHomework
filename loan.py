@@ -35,6 +35,7 @@ class Loan():
                 else:
                     duration = duration - y + 12
                 print("Duration revision from", _d, "to", duration, "Row", i)
+            duration_year = int(duration / 12)
             if payments * duration != amount:
                 _a = amount
                 amount = payments * duration
@@ -47,7 +48,7 @@ class Loan():
                 print ("Payduration error Row", i)
                 continue
             if not c.sameChecker(self.cur, loan_id):
-                self.cleaned_data.append([loan_id, account_id, date, time, amount, duration, payments, status, payduration])
+                self.cleaned_data.append([loan_id, account_id, date, time, amount, duration, duration_year, payments, status, payduration])
                 self.cur.add(loan_id)
             else:
                 print('Primary key error Row', i)
@@ -55,7 +56,7 @@ class Loan():
     def output(self, fileName):
         f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
-        csvwriter.writerow(['loan_id', 'account_id', 'date', 'time', 'amount', 'duration', 'payments', 'status', 'payduration'])
+        csvwriter.writerow(['loan_id', 'account_id', 'date', 'time', 'amount', 'duration', 'duration_year', 'payments', 'status', 'payduration'])
         for item in self.cleaned_data:
             csvwriter.writerow(item)
 
