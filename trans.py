@@ -20,6 +20,7 @@ class Trans():
             account_id = c.intChecker(item[1], i)
             if not c.sameChecker(account_id_set, account_id):
                 print('Foreign key account_id error Row', i)
+                continue
             date, time = c.dateChecker(item[2], i)
             if date == '-1' and time == '-1':
                 print('Date error Row', i)

@@ -20,6 +20,7 @@ class Order():
             account_id = c.intChecker(item[1], i)
             if not c.sameChecker(account_id_set, account_id):
                 print('Foreign key account_id error Row', i)
+                continue
             bank_to = item[2]
             account_to = c.intChecker(item[3], i)
             amount = c.intChecker(item[4], i)

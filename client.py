@@ -39,6 +39,7 @@ class Client():
             district_id = c.intChecker(item[2], i)
             if not c.sameChecker(district_id_set, district_id):
                 print('Foreign key district_id error Row', i)
+                continue
             if not c.sameChecker(self.cur, client_id):
                 self.cleaned_data.append([client_id, district_id, gender, birth, age, age_type])
                 self.cur.add(client_id)

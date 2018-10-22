@@ -20,6 +20,7 @@ class Account():
             district_id = c.intChecker(item[1], i)
             if not c.sameChecker(district_id_set, district_id):
                 print('Foreign key district_id error Row', i)
+                continue
             frequency = c.strChecker(item[2], ["POPLATEK MESICNE", "POPLATEK TYDNE", "POPLATEK PO OBRATU"], i)
             if frequency == "-1":
                 print('String frequency error Row', i)

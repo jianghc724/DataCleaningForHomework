@@ -20,9 +20,11 @@ class Disp():
             client_id = c.intChecker(item[1], i)
             if not c.sameChecker(client_id_set, client_id):
                 print('Foreign key client_id error Row', i)
+                continue
             account_id = c.intChecker(item[2], i)
             if not c.sameChecker(account_id_set, account_id):
                 print('Foreign key account_id error Row', i)
+                continue
             type = c.strChecker(item[3], ["OWNER", "DISPONENT"], i)
             if type == "-1":
                 print('String error type Row', i)

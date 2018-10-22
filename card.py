@@ -20,6 +20,7 @@ class Card():
             disp_id = c.intChecker(item[1], i)
             if not c.sameChecker(disp_id_set, disp_id):
                 print('Foreign key disp_id error Row', i)
+                continue
             type = c.strChecker(item[2], ["junior", "classic", "gold"], i)
             if type == "-1":
                 print('String type error Row', i)
