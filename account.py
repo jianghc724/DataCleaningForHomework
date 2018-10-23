@@ -33,11 +33,13 @@ class Account():
                 self.cur.add(account_id)
             else:
                 print('Primary key error Row', i)
+        self.cleaned_data = sorted(self.cleaned_data, key=lambda x:x[0])
+
 
     def output(self, fileName):
         f = open(fileName, 'w', newline='')
         csvwriter = csv.writer(f, dialect='excel')
-        csvwriter.writerow(['account_id', 'district_id', 'frequency', 'date', 'time'])
+        csvwriter.writerow(['account_id', 'district_id', 'frequency', 'date', 'time', 'gender', 'type'])
         for item in self.cleaned_data:
             csvwriter.writerow(item)
 
@@ -45,4 +47,4 @@ if __name__ == '__main__':
     account = Account()
     # print(account.data)
     account.clean(set(range(1,10000000)))
-    account.output("cleaned_account.csv")
+    #account.output("cleaned_account.csv")
